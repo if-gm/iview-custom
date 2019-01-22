@@ -6,6 +6,7 @@
 *.patch
 *.bak
 .DS_Store
+dist/
 node_modules/
 node_modules2/
 .project

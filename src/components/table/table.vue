@@ -104,6 +104,7 @@
              :class="prefixCls + '-cell-tooltip'"
              v-show="isShowTooltip">
             <div class="arrow"></div>
+            <div class="fix-arrow"></div>
             <div v-html="tooltipContent"></div>
         </div>
     </div>
@@ -979,7 +980,7 @@
                 this.$refs[this.prefixCls + '-cell-tooltip'].style.top = offset.top + evt.target.offsetHeight + 4 + 'px';
             },
             isTooltip(dom) {
-                return dom.classList.contains('ivu-table-cell-tooltip-content'); // 定义在 iview-custom\src\components\table\cell.vue
+                return dom.hasAttribute('tooltip'); // 定义在 iview-custom\src\components\table\cell.vue
             },
             isEnableTooltip(dom) {
                 let count = 5;

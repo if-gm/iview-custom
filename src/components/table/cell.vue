@@ -9,7 +9,8 @@
         <template v-if="renderType === 'html'"><span v-html="row[column.key]"></span></template>
         <template v-if="renderType === 'normal'">
             <template v-if="column.tooltip">
-                <div class="ivu-table-cell-tooltip-content">
+                <!--在render中使用时，可以给想要提示的内容加 tooltip-->
+                <div tooltip>
                     {{ row[column.key] }}
                 </div>
                 <!--<Tooltip transfer :content="row[column.key]" :disabled="!showTooltip" :max-width="300"-->

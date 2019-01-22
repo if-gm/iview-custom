@@ -21,7 +21,8 @@
                     title: "客户手机",
                     width: 150,
                     fixed: "left",
-
+                    sortable: 'custom',
+                    order: 'asc',
                     key: "AO",
                 }, {
                     title: "所属公海",

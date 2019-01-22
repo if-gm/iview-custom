@@ -28,10 +28,10 @@
                                        :index="index"></render-header>
                         <span :class="[prefixCls + '-sort']" v-if="column.sortable">
                                 <i class="ivu-icon ivu-icon-md-arrow-dropup"
-                                   :class="{on: getColumn(rowIndex, index)._sortType === 'asc'}"
+                                   :class="{on: getColumn(rowIndex, index)._sortType === 'asc' || column.order === 'asc' }"
                                    @click="handleSort(getColumn(rowIndex, index)._index, 'asc')"></i>
                                 <i class="ivu-icon ivu-icon-md-arrow-dropdown"
-                                   :class="{on: getColumn(rowIndex, index)._sortType === 'desc'}"
+                                   :class="{on: getColumn(rowIndex, index)._sortType === 'desc'  || column.order === 'desc' }"
                                    @click="handleSort(getColumn(rowIndex, index)._index, 'desc')"></i>
                             </span>
                         <Poptip
