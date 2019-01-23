@@ -27,30 +27,45 @@
     </ul>
     <ul :class="wrapClasses" :style="styles" v-else>
         <span :class="[prefixCls + '-total']" v-if="showTotal">
-            <slot>{{ t('i.page.total') }} {{ total }} <template v-if="total <= 1">{{ t('i.page.item') }}</template><template v-else>{{ t('i.page.items') }}</template></slot>
+            <slot>{{ t('i.page.total') }} {{ safeTotal }} <template v-if="total <= 1">{{ t('i.page.item') }}</template><template
+                v-else>{{ t('i.page.items') }}</template></slot>
         </span>
         <li
             :title="t('i.page.prev')"
             :class="prevClasses"
             @click="prev">
-            <a><template v-if="prevText !== ''">{{ prevText }}</template><i v-else class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
+            <a>
+                <template v-if="prevText !== ''">{{ prevText }}</template>
+                <i v-else class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
         </li>
         <li title="1" :class="firstPageClasses" @click="changePage(1)"><a>1</a></li>
-        <li :title="t('i.page.prev5')" v-if="currentPage > 5" :class="[prefixCls + '-item-jump-prev']" @click="fastPrev"><a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a></li>
-        <li :title="currentPage - 3" v-if="currentPage === 5" :class="[prefixCls + '-item']" @click="changePage(currentPage - 3)"><a>{{ currentPage - 3 }}</a></li>
-        <li :title="currentPage - 2" v-if="currentPage - 2 > 1" :class="[prefixCls + '-item']" @click="changePage(currentPage - 2)"><a>{{ currentPage - 2 }}</a></li>
-        <li :title="currentPage - 1" v-if="currentPage - 1 > 1" :class="[prefixCls + '-item']" @click="changePage(currentPage - 1)"><a>{{ currentPage - 1 }}</a></li>
-        <li :title="currentPage" v-if="currentPage != 1 && currentPage != allPages" :class="[prefixCls + '-item',prefixCls + '-item-active']"><a>{{ currentPage }}</a></li>
-        <li :title="currentPage + 1" v-if="currentPage + 1 < allPages" :class="[prefixCls + '-item']" @click="changePage(currentPage + 1)"><a>{{ currentPage + 1 }}</a></li>
-        <li :title="currentPage + 2" v-if="currentPage + 2 < allPages" :class="[prefixCls + '-item']" @click="changePage(currentPage + 2)"><a>{{ currentPage + 2 }}</a></li>
-        <li :title="currentPage + 3" v-if="allPages - currentPage === 4" :class="[prefixCls + '-item']" @click="changePage(currentPage + 3)"><a>{{ currentPage + 3 }}</a></li>
-        <li :title="t('i.page.next5')" v-if="allPages - currentPage >= 5" :class="[prefixCls + '-item-jump-next']" @click="fastNext"><a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a></li>
-        <li :title="allPages" v-if="allPages > 1" :class="lastPageClasses" @click="changePage(allPages)"><a>{{ allPages }}</a></li>
+        <li :title="t('i.page.prev5')" v-if="currentPage > 5" :class="[prefixCls + '-item-jump-prev']"
+            @click="fastPrev"><a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a></li>
+        <li :title="currentPage - 3" v-if="currentPage === 5" :class="[prefixCls + '-item']"
+            @click="changePage(currentPage - 3)"><a>{{ currentPage - 3 }}</a></li>
+        <li :title="currentPage - 2" v-if="currentPage - 2 > 1" :class="[prefixCls + '-item']"
+            @click="changePage(currentPage - 2)"><a>{{ currentPage - 2 }}</a></li>
+        <li :title="currentPage - 1" v-if="currentPage - 1 > 1" :class="[prefixCls + '-item']"
+            @click="changePage(currentPage - 1)"><a>{{ currentPage - 1 }}</a></li>
+        <li :title="currentPage" v-if="currentPage != 1 && currentPage != allPages"
+            :class="[prefixCls + '-item',prefixCls + '-item-active']"><a>{{ currentPage }}</a></li>
+        <li :title="currentPage + 1" v-if="currentPage + 1 < allPages" :class="[prefixCls + '-item']"
+            @click="changePage(currentPage + 1)"><a>{{ currentPage + 1 }}</a></li>
+        <li :title="currentPage + 2" v-if="currentPage + 2 < allPages" :class="[prefixCls + '-item']"
+            @click="changePage(currentPage + 2)"><a>{{ currentPage + 2 }}</a></li>
+        <li :title="currentPage + 3" v-if="allPages - currentPage === 4" :class="[prefixCls + '-item']"
+            @click="changePage(currentPage + 3)"><a>{{ currentPage + 3 }}</a></li>
+        <li :title="t('i.page.next5')" v-if="allPages - currentPage >= 5" :class="[prefixCls + '-item-jump-next']"
+            @click="fastNext"><a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a></li>
+        <li :title="allPages" v-if="allPages > 1" :class="lastPageClasses" @click="changePage(allPages)"><a>{{ allPages
+            }}</a></li>
         <li
             :title="t('i.page.next')"
             :class="nextClasses"
             @click="next">
-            <a><template v-if="nextText !== ''">{{ nextText }}</template><i v-else class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
+            <a>
+                <template v-if="nextText !== ''">{{ nextText }}</template>
+                <i v-else class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
         </li>
         <Options
             :show-sizer="showSizer"
@@ -69,7 +84,7 @@
     </ul>
 </template>
 <script>
-    import { oneOf } from '../../utils/assist';
+    import {oneOf} from '../../utils/assist';
     import Options from './options.vue';
     import Locale from '../../mixins/locale';
 
@@ -77,12 +92,16 @@
 
     export default {
         name: 'Page',
-        mixins: [ Locale ],
-        components: { Options },
+        mixins: [Locale],
+        components: {Options},
         props: {
             current: {
                 type: Number,
                 default: 1
+            },
+            maxShowTotal: {
+                type: Number,
+                default: 0, // 0 为不使用
             },
             total: {
                 type: Number,
@@ -94,24 +113,24 @@
             },
             pageSizeOpts: {
                 type: Array,
-                default () {
+                default() {
                     return [10, 20, 30, 40];
                 }
             },
             placement: {
-                validator (value) {
+                validator(value) {
                     return oneOf(value, ['top', 'bottom']);
                 },
                 default: 'bottom'
             },
             transfer: {
                 type: Boolean,
-                default () {
+                default() {
                     return !this.$IVIEW || this.$IVIEW.transfer === '' ? false : this.$IVIEW.transfer;
                 }
             },
             size: {
-                validator (value) {
+                validator(value) {
                     return oneOf(value, ['small']);
                 }
             },
@@ -146,7 +165,7 @@
                 default: ''
             }
         },
-        data () {
+        data() {
             return {
                 prefixCls: prefixCls,
                 currentPage: this.current,
@@ -154,28 +173,34 @@
             };
         },
         watch: {
-            total (val) {
+            total(val) {
                 let maxPage = Math.ceil(val / this.currentPageSize);
-                if (maxPage < this.currentPage ) {
+                if (maxPage < this.currentPage) {
                     this.currentPage = (maxPage === 0 ? 1 : maxPage);
                 }
             },
-            current (val) {
+            current(val) {
                 this.currentPage = val;
             },
-            pageSize (val) {
+            pageSize(val) {
                 this.currentPageSize = val;
             }
         },
         computed: {
-            isSmall () {
+            safeTotal() {
+                if (this.maxShowTotal &&  this.total >= this.maxShowTotal) {
+                    return this.maxShowTotal + '+';
+                }
+                return this.total;
+            },
+            isSmall() {
                 return !!this.size;
             },
-            allPages () {
+            allPages() {
                 const allPage = Math.ceil(this.total / this.currentPageSize);
                 return (allPage === 0) ? 1 : allPage;
             },
-            simpleWrapClasses () {
+            simpleWrapClasses() {
                 return [
                     `${prefixCls}`,
                     `${prefixCls}-simple`,
@@ -184,10 +209,10 @@
                     }
                 ];
             },
-            simplePagerClasses () {
+            simplePagerClasses() {
                 return `${prefixCls}-simple-pager`;
             },
-            wrapClasses () {
+            wrapClasses() {
                 return [
                     `${prefixCls}`,
                     {
@@ -196,7 +221,7 @@
                     }
                 ];
             },
-            prevClasses () {
+            prevClasses() {
                 return [
                     `${prefixCls}-prev`,
                     {
@@ -205,7 +230,7 @@
                     }
                 ];
             },
-            nextClasses () {
+            nextClasses() {
                 return [
                     `${prefixCls}-next`,
                     {
@@ -214,7 +239,7 @@
                     }
                 ];
             },
-            firstPageClasses () {
+            firstPageClasses() {
                 return [
                     `${prefixCls}-item`,
                     {
@@ -222,7 +247,7 @@
                     }
                 ];
             },
-            lastPageClasses () {
+            lastPageClasses() {
                 return [
                     `${prefixCls}-item`,
                     {
@@ -232,28 +257,28 @@
             }
         },
         methods: {
-            changePage (page) {
+            changePage(page) {
                 if (this.currentPage != page) {
                     this.currentPage = page;
                     this.$emit('update:current', page);
                     this.$emit('on-change', page);
                 }
             },
-            prev () {
+            prev() {
                 const current = this.currentPage;
                 if (current <= 1) {
                     return false;
                 }
                 this.changePage(current - 1);
             },
-            next () {
+            next() {
                 const current = this.currentPage;
                 if (current >= this.allPages) {
                     return false;
                 }
                 this.changePage(current + 1);
             },
-            fastPrev () {
+            fastPrev() {
                 const page = this.currentPage - 5;
                 if (page > 0) {
                     this.changePage(page);
@@ -261,7 +286,7 @@
                     this.changePage(1);
                 }
             },
-            fastNext () {
+            fastNext() {
                 const page = this.currentPage + 5;
                 if (page > this.allPages) {
                     this.changePage(this.allPages);
@@ -269,15 +294,15 @@
                     this.changePage(page);
                 }
             },
-            onSize (pageSize) {
+            onSize(pageSize) {
                 this.currentPageSize = pageSize;
                 this.$emit('on-page-size-change', pageSize);
                 this.changePage(1);
             },
-            onPage (page) {
+            onPage(page) {
                 this.changePage(page);
             },
-            keyDown (e) {
+            keyDown(e) {
                 const key = e.keyCode;
                 const condition = (key >= 48 && key <= 57) || (key >= 96 && key <= 105) || key === 8 || key === 37 || key === 39;
 
@@ -285,7 +310,7 @@
                     e.preventDefault();
                 }
             },
-            keyUp (e) {
+            keyUp(e) {
                 const key = e.keyCode;
                 const val = parseInt(e.target.value);
 

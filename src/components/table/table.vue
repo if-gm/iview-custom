@@ -975,7 +975,7 @@
                 if (this.isShowTooltip) return;
                 this.isShowTooltip = true;
                 const offset = this.getOffsetWithClient(evt.target);
-                this.tooltipContent = evt.target.innerHTML;
+                this.tooltipContent = evt.target.getAttribute('content') || evt.target.innerHTML;
                 this.$refs[this.prefixCls + '-cell-tooltip'].style.left = offset.left - 8 + 'px';
                 this.$refs[this.prefixCls + '-cell-tooltip'].style.top = offset.top + evt.target.offsetHeight + 4 + 'px';
             },

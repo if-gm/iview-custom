@@ -35,8 +35,10 @@
                     title: "备注",
                     key: "V",
                     fixed: "right",
-
-                    width: 120
+                    width: 150,
+                    render:(h,params)=>{
+                        return (<div tooltip content="12222111">1111</div>);
+                    },
                 }, {
                     title: "最新跟进记录",
                     width: 150,

@@ -7,7 +7,7 @@
         <Page :current="2" :total="50" simple></Page>
 
         <div style="margin:10px 0px">
-            <Page :total="1000"  show-sizer show-elevator show-total  :current="12"></Page>
+            <Page :total="1000"  show-sizer show-elevator show-total  :current="12" :max-show-total="500"></Page>
         </div>
         <div style="margin:10px 0px">
             <Page :total="1000" show-sizer show-elevator show-total  :current="12"></Page>
