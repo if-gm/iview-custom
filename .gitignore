@@ -7,6 +7,7 @@
 *.bak
 .DS_Store
 /dist/
+dist/
 node_modules/
 node_modules2/
 .project
